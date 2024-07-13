@@ -27,8 +27,8 @@ public class DogDAO extends DAO {
 				svo.setDog_roomname(rs.getString("Dog_roomname"));
 				svo.setDog_user(rs.getString("Dog_user"));
 				svo.setDog_mansu(rs.getString("Dog_mansu"));
-				svo.setDog_dogsu(rs.getString("Dog_dogsu"));
-				svo.setDog_pmoney(rs.getString("Dog_pmoney"));
+				svo.setDog_dogsu(rs.getInt("Dog_dogsu"));
+				svo.setDog_pmoney(rs.getInt("Dog_pmoney"));
 				svo.setCreation_date(rs.getDate("creation_date"));
 				list.add(svo);
 
@@ -55,7 +55,7 @@ public class DogDAO extends DAO {
 				svo.setRoom_maxman(rs.getString("Room_maxman"));
 				svo.setRoom_maxdog(rs.getString("Room_maxdog"));
 				svo.setRoom_price(rs.getString("Room_price"));
-				svo.setRoom_option(rs.getString("Room_option"));
+				
 
 				list.add(svo);
 
@@ -93,20 +93,25 @@ public class DogDAO extends DAO {
 	// 예약
 
 	public boolean insertDog(DogVO svo) {
-		String sql = "insert into C_Reservation (Res_roomname, Res_name, Res_password, Res_choday, Res_useday, Res_mansu, Res_dogsu)";
-		sql += "values(?,?,?,?,?,?,?,?)";
+		String sql = "INSERT INTO A_Doglist( Dog_roomname, dog_user, Dog_password, Dog_choday, Dog_useday, Dog_outday, Dog_mansu, Dog_dogsu, Dog_pmoney)\r\n"
+				+ "VALUES (?,?,?,?"
+				+ ",?,?,?,?,?)";
+	
 
 		conn = getConn();
 		try {
 			psmt = conn.prepareStatement(sql);
+
+			psmt.setString(1, svo.getDog_roomname());
+			psmt.setString(2, svo.getDog_user());
+			psmt.setString(3, svo.getDog_password());
+			psmt.setString(4, svo.getDog_choday());
+			psmt.setString(5, svo.getDog_useday());
+			psmt.setString(6, svo.getDog_outday());
+			psmt.setString(7, svo.getDog_mansu());
+			psmt.setInt(8, svo.getDog_dogsu());
+			psmt.setInt(9, svo.getDog_pmoney());
 			
-			psmt.setString(1, svo.getRes_roomname());
-			psmt.setString(2, svo.getRes_name());
-			psmt.setString(3, svo.getRes_password());
-			psmt.setString(4, svo.getRes_choday());
-			psmt.setString(5, svo.getRes_useday());
-			psmt.setString(6, svo.getRes_mansu());
-			psmt.setString(7, svo.getRes_dogsu());
 
 			int r = psmt.executeUpdate(); // 쿼리실행.
 			if (r == 1) {

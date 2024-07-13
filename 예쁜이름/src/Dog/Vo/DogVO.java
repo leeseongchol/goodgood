@@ -11,35 +11,24 @@ public class DogVO {
 	private String Dog_roomname;
 	private String Dog_user;
 	private String Dog_mansu;
-	private String Dog_dogsu;
-	private String Dog_pmoney;
+	private int Dog_dogsu;
+	private int Dog_pmoney;
 	private Date creation_date;
+	private String Dog_password;
 	// room 2번 객실정보
 	private String Room_name;
 	private String Room_maxman;
 	private String Room_maxdog;
 	private String Room_price;
-	private String Room_option;
-	// reservation 3-1.예약 하기
 	
-	private String Res_roomname;
-	private String Res_name;
-	private String Res_password;
-	private String Res_mansu;
-	private String Res_choday;
-	private String Res_useday;
-	private String Res_dogsu;
-
-
-
 
 	public String briefShow1() {
-		return Dog_choday + "\t" + Dog_useday + "     " + Dog_outday + "\t " + Dog_roomname + " \t  " + Dog_user + "\t "
-				+ Dog_mansu + "    " + Dog_dogsu + "\t   " + Dog_pmoney + "  \t   " + creation_date;
+		return Dog_choday + " \t  "  + Dog_useday + "박     " + Dog_outday + " \t     " + Dog_roomname + "\t" + Dog_user + "\t "
+				+ Dog_mansu + "명\t " + Dog_dogsu + "마리 \t   " + Dog_pmoney + "원\t   " + creation_date;
 	}
 
 	public String briefShow2() {
-		return Room_name + "  \t   " + Room_maxman + "\t\t " + Room_maxdog + " \t  " + Room_price + "\t " + Room_option;
+		return Room_name + "  \t   " + Room_maxman + "\t\t " + Room_maxdog + " \t  " + Room_price ;
 	}
 
 	public String getDog_choday() {
@@ -90,19 +79,19 @@ public class DogVO {
 		Dog_mansu = dog_mansu;
 	}
 
-	public String getDog_dogsu() {
+	public int getDog_dogsu() {
 		return Dog_dogsu;
 	}
 
-	public void setDog_dogsu(String dog_dogsu) {
+	public void setDog_dogsu(int dog_dogsu) {
 		Dog_dogsu = dog_dogsu;
 	}
 
-	public String getDog_pmoney() {
+	public int getDog_pmoney() {
 		return Dog_pmoney;
 	}
 
-	public void setDog_pmoney(String dog_pmoney) {
+	public void setDog_pmoney(int dog_pmoney) {
 		Dog_pmoney = dog_pmoney;
 	}
 
@@ -146,72 +135,17 @@ public class DogVO {
 		Room_price = room_price;
 	}
 
-	public String getRoom_option() {
-		return Room_option;
+
+
+
+
+	public String getDog_password() {
+		return Dog_password;
 	}
 
-	public void setRoom_option(String room_option) {
-		Room_option = room_option;
+	public void setDog_password(String res_password) {
+		Dog_password = res_password;
 	}
-
-	
-
-	public String getRes_roomname() {
-		return Res_roomname;
-	}
-
-	public void setRes_roomname(String res_roomname) {
-		Res_roomname = res_roomname;
-	}
-
-	public String getRes_name() {
-		return Res_name;
-	}
-
-	public void setRes_name(String res_name) {
-		Res_name = res_name;
-	}
-
-	public String getRes_password() {
-		return Res_password;
-	}
-
-	public void setRes_password(String res_password) {
-		Res_password = res_password;
-	}
-
-	public String getRes_mansu() {
-		return Res_mansu;
-	}
-
-	public void setRes_mansu(String res_mansu) {
-		Res_mansu = res_mansu;
-	}
-
-	public String getRes_choday() {
-		return Res_choday;
-	}
-
-	public void setRes_choday(String res_choday) {
-		Res_choday = res_choday;
-	}
-
-	public String getRes_useday() {
-		return Res_useday;
-	}
-
-	public void setRes_useday(String res_useday) {
-		Res_useday = res_useday;
-	}
-	public String getRes_dogsu() {
-		return Res_dogsu;
-	}
-
-	public void setRes_dogsu(String res_dogsu) {
-		Res_dogsu = res_dogsu;
-	}
-
-
 
 
 
