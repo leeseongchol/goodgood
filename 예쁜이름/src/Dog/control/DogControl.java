@@ -20,7 +20,7 @@ public class DogControl {
 
 		while (isTrue) {
 			System.out.println("===============================================================");
-			System.out.println("1.예약리스트 2.객실정보 3.예약하기 4.예약관리  5.이용안내  6.종료 ");
+			System.out.println("1.예약리스트 2.객실정보 3.예약하기 4.예약관리  5.이용안내 6.월 예상매출  6.종료 ");
 			System.out.println("===============================================================");
 			System.out.println("선택 > ");
 
@@ -152,7 +152,7 @@ public class DogControl {
 		// 결과 날짜를 포맷 형식에 맞게 변환합니다.
 		String reDate = simpleDateFormat.format(cal.getTime());
 		// 결과를 출력합니다.
-		System.out.println(reDate);
+		
 		
 		DogVO dog = new DogVO();
 		dog.setDog_roomname(Dog_roomname);
@@ -162,7 +162,6 @@ public class DogControl {
 		dog.setDog_useday(Dog_useday);
 		dog.setDog_mansu(Dog_mansu);
 		dog.setDog_dogsu(Dog_dogsu);
-
 		dog.setDog_pmoney(Dog_dogsu * 20000);
 
 		// 입력기능 호출
@@ -171,6 +170,7 @@ public class DogControl {
 					+ "' ~'" + reDate + "' 까지 예약이 완료되었습니다.");
 		} else {
 			System.out.println("눈 똑바로 뜨고 달력에 체크된 날짜에는 예약하지마세요.");
+			
 		}
 	}
 
@@ -324,7 +324,7 @@ public class DogControl {
 				// 결과 날짜를 포맷 형식에 맞게 변환합니다.
 				String reDate = simpleDateFormat.format(cal1.getTime());
 				// 결과를 출력합니다.
-				System.out.println(reDate);
+				
 		
 		DogVO dog = new DogVO();
 		dog.setDog_roomname(Dog_roomname);
@@ -340,6 +340,8 @@ public class DogControl {
 		if (ddao.updateDog(dog)) {
 			System.out.println("'" + Dog_user + "'" + "님 이름으로" + "'" + Dog_roomname + "'" + " 객실이 '" + Dog_choday + "' 부터"
 					+ "' ~'" + reDate + "' 까지 예약이 수정되었습니다.");
+			System.out.println(dog_user+"님께 수정문자를 발송하였습니다.");
+			
 		}
 	}
 
