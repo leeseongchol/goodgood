@@ -1,6 +1,9 @@
 package Dog.DAO;
 
+
+import java.sql.Connection;
 import java.sql.SQLException;
+import java.sql.Statement;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -26,7 +29,7 @@ public class DogDAO extends DAO {
 				svo.setDog_outday(rs.getString("Dog_outday"));
 				svo.setDog_roomname(rs.getString("Dog_roomname"));
 				svo.setDog_user(rs.getString("Dog_user"));
-				svo.setDog_mansu(rs.getString("Dog_mansu"));
+				svo.setDog_mansu(rs.getInt("Dog_mansu"));
 				svo.setDog_dogsu(rs.getInt("Dog_dogsu"));
 				svo.setDog_pmoney(rs.getInt("Dog_pmoney"));
 				svo.setCreation_date(rs.getDate("creation_date"));
@@ -93,9 +96,9 @@ public class DogDAO extends DAO {
 	// 예약
 
 	public boolean insertDog(DogVO svo) {
-		String sql = "INSERT INTO A_Doglist( Dog_roomname, dog_user, Dog_password, Dog_choday, Dog_useday, Dog_outday, Dog_mansu, Dog_dogsu, Dog_pmoney)\r\n"
+		String sql = "INSERT INTO A_Doglist( Dog_roomname, dog_user,  Dog_choday, Dog_useday, Dog_outday, Dog_mansu, Dog_dogsu, Dog_pmoney)\r\n"
 				+ "VALUES (?,?,?,?"
-				+ ",?,?,?,?,?)";
+				+ ", TO_CHAR(TO_DATE(?, 'mm-dd') + ? , 'mm-dd'),?,?,?)";
 	
 
 		conn = getConn();
@@ -103,12 +106,14 @@ public class DogDAO extends DAO {
 			psmt = conn.prepareStatement(sql);
 
 			psmt.setString(1, svo.getDog_roomname());
-			psmt.setString(2, svo.getDog_user());
-			psmt.setString(3, svo.getDog_password());
-			psmt.setString(4, svo.getDog_choday());
-			psmt.setString(5, svo.getDog_useday());
-			psmt.setString(6, svo.getDog_outday());
-			psmt.setString(7, svo.getDog_mansu());
+			psmt.setString(2, svo.getDog_user());		
+			psmt.setString(3, svo.getDog_choday());
+			psmt.setString(4, svo.getDog_useday());
+			
+			psmt.setString(5, svo.getDog_choday());
+			psmt.setInt(6,Integer.parseInt( svo.getDog_useday()));
+			
+			psmt.setInt(7, svo.getDog_mansu());
 			psmt.setInt(8, svo.getDog_dogsu());
 			psmt.setInt(9, svo.getDog_pmoney());
 			
@@ -122,4 +127,80 @@ public class DogDAO extends DAO {
 		}
 		return false;
 	}
+	// 단건조회.
+	public int selectExists(String Dog_user) {
+		String sql = "select count(1) from A_DOGLIST";
+		sql += "       where Dog_user = ?";
+		conn = getConn();
+		try {
+			psmt = conn.prepareStatement(sql);
+			psmt.setString(1, Dog_user);
+			rs = psmt.executeQuery();
+			if (rs.next()) {
+				return rs.getInt(1);
+			}
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+		return 0;
+	}
+	// 수정기능.
+		public boolean updateDog(DogVO svo) {
+			String sql = "update A_Doglist";
+			sql += "			set  Dog_choday = ?";
+			sql += "			    ,Dog_useday = ?";
+			sql += "			    ,Dog_outday =  TO_CHAR(TO_DATE(?, 'mm-dd') + ? , 'mm-dd')";
+			sql += "			    ,Dog_roomname = ?";
+			sql += "			    ,Dog_mansu = ?";
+			sql += "			    ,Dog_dogsu = ?";		
+					
+			sql += "		  where Dog_user = ?";
+
+			conn = getConn();
+			try {
+				psmt = conn.prepareStatement(sql);
+				
+				psmt.setString(1, svo.getDog_choday());
+				psmt.setString(2, svo.getDog_useday());
+				
+				psmt.setString(3, svo.getDog_choday());
+				psmt.setInt(4,Integer.parseInt( svo.getDog_useday()));
+				
+				psmt.setString(5, svo.getDog_roomname());
+				psmt.setInt(6, svo.getDog_mansu());
+				psmt.setInt(7, svo.getDog_dogsu());
+				psmt.setString(8, svo.getDog_user());
+				
+
+				int r = psmt.executeUpdate(); // 쿼리실행.
+				if (r == 1) {
+					return true; // 정상처리
+				}
+			} catch (SQLException e) {
+				e.printStackTrace();
+			}
+			return false; // 비정상처리
+		} // end of updateStudent.
+		// 삭제기능
+		public  boolean removeD(String Dog_user) {
+//			delete from tbl_student
+//			where std_no = '1';
+			Connection conn = getConn();
+			String sql = "delete from A_DOGLIST";
+			sql += " WHERE Dog_user = '" + Dog_user + "'";
+
+			try {
+				Statement stmt = conn.createStatement();
+				int r = stmt.executeUpdate(sql); // insert, update, delete
+				if(r == 1) {
+					return true; //정상
+				}
+				
+			} catch (SQLException e) {
+
+				e.printStackTrace();
+
+			}
+				return false;
+		}
 }
