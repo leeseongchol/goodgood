@@ -47,7 +47,7 @@ public class DogControl {
 
 			case 6:
 
-				System.out.println("예약해주신 모든분께 진심으로 감사를 드립니다.");
+				System.out.println("모든 접수가 완료되었습니다.");
 				isTrue = false;
 
 			}
