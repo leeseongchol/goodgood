@@ -153,7 +153,7 @@ public class DogDAO extends DAO {
 			sql += "			    ,Dog_roomname = ?";
 			sql += "			    ,Dog_mansu = ?";
 			sql += "			    ,Dog_dogsu = ?";		
-					
+			sql += "			    ,Dog_pmoney = ?";							
 			sql += "		  where Dog_user = ?";
 
 			conn = getConn();
@@ -169,7 +169,8 @@ public class DogDAO extends DAO {
 				psmt.setString(5, svo.getDog_roomname());
 				psmt.setInt(6, svo.getDog_mansu());
 				psmt.setInt(7, svo.getDog_dogsu());
-				psmt.setString(8, svo.getDog_user());
+				psmt.setInt(8, svo.getDog_pmoney());
+				psmt.setString(9, svo.getDog_user());
 				
 
 				int r = psmt.executeUpdate(); // 쿼리실행.
@@ -202,4 +203,23 @@ public class DogDAO extends DAO {
 			}
 				return false;
 		}
+		 // Dog_pmoney의 총합을 계산하는 메서드
+	    public int calculateTotalPmoney() {
+	        String sql = "select Dog_pmoney from A_Doglist"; // A_Doglist 테이블에서 Dog_pmoney 필드를 선택
+	        int totalPmoney = 0;
+	        conn = getConn();
+	        try {
+	            stmt = conn.createStatement();
+	            rs = stmt.executeQuery(sql);
+	            while (rs.next()) {
+	                totalPmoney += rs.getInt("Dog_pmoney"); // 각 행에서 Dog_pmoney 값을 더함
+	            }
+	        } catch (SQLException e) {
+	            e.printStackTrace();
+	        } finally {
+	            // 자원 해제 코드 (생략)
+	        }
+	        return totalPmoney;
+	    }
+
 }
