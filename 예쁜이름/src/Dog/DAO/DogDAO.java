@@ -174,7 +174,7 @@ public class DogDAO extends DAO {
 
 				int r = psmt.executeUpdate(); // 쿼리실행.
 				if (r == 1) {
-					return true; // 정상처리
+					return true; // 정상처리d
 				}
 			} catch (SQLException e) {
 				e.printStackTrace();

@@ -30,5 +30,5 @@ public class DAO {
         }
         return conn;
 
-    }//end of getConn.  //db연결 하는 클라스 
+    }//end of getConn.  //
 }

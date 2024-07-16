@@ -245,7 +245,7 @@ public class DogControl {
 		
 		
 			
-		String Dog_user ; // 블록레벨 변수.
+		String Dog_user ; // 블록레벨 변수.d
 		while (true) {
 			System.out.println(">변경할 예약자 >");
 			Dog_user = sc.nextLine();
