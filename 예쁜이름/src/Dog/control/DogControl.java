@@ -20,7 +20,7 @@ public class DogControl {
 
 		while (isTrue) {
 			System.out.println("===============================================================");
-			System.out.println("1.예약리스트 2.객실정보 3.예약하기 4.예약관리  5.이용안내 6.월 예상매출  6.종료 ");
+			System.out.println("1.예약리스트 2.객실정보 3.예약하기 4.예약관리  5.이용안내  7.종료 ");
 			System.out.println("===============================================================");
 			System.out.println("선택 > ");
 
@@ -169,7 +169,7 @@ public class DogControl {
 			System.out.println("'" + Dog_user + "'" + "님 이름으로" + "'" + Dog_roomname + "'" + " 객실이 '" + Dog_choday + "' 부터"
 					+ "' ~'" + reDate + "' 까지 예약이 완료되었습니다.");
 		} else {
-			System.out.println("눈 똑바로 뜨고 달력에 체크된 날짜에는 예약하지마세요.");
+			System.out.println("해당날짜에 예약이 있습니다.");
 			
 		}
 	}
