@@ -174,7 +174,7 @@ public class DogDAO extends DAO {
 
 				int r = psmt.executeUpdate(); // 쿼리실행.
 				if (r == 1) {
-					return true; // 정상처리d
+					return true; // 정상처리
 				}
 			} catch (SQLException e) {
 				e.printStackTrace();
@@ -188,7 +188,6 @@ public class DogDAO extends DAO {
 			Connection conn = getConn();
 			String sql = "delete from A_DOGLIST";
 			sql += " WHERE Dog_user = '" + Dog_user + "'";
-
 			try {
 				Statement stmt = conn.createStatement();
 				int r = stmt.executeUpdate(sql); // insert, update, delete
